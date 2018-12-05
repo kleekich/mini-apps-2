@@ -4,7 +4,7 @@
   "description": "Historical Events Finder",
   "scripts": {
     "build": "webpack -d --watch",
-    "start": "json-server data/db.json --static public/index.html"
+    "start": "json-server data/db.json"
   },
   "author": "Kangsik Lee",
   "license": "ISC",
