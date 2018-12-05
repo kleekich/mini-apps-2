@@ -7,12 +7,11 @@ class List extends React.Component{
   }
   render(){
     return(
-      this.props.events.map(event => {
+      this.props.events.map(event => (
         <div>
           <ListItem event={event} />
         </div>
-        
-      })
+      ))
     )
   }
 }

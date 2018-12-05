@@ -7,8 +7,8 @@ class ListItem extends React.Component {
   render(){
     return(
       <div>
-        hi
-        <h1>{this.props.event}</h1>
+      
+        <h1>{this.props.event.description}</h1>
       </div>
     )
   }

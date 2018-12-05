@@ -23,6 +23,7 @@ class App extends React.Component{
     .then(response => response.json())
     .then(result => {
       console.log(JSON.stringify(result));
+      this.setState({events: result});
     })
     .catch(err => {
       console.log(err);
