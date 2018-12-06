@@ -7,6 +7,7 @@ class ListItem extends React.Component {
   render(){
     return(
       <div>
+        <h3></h3>
         <p>{this.props.event.description}</p>
       </div>
     )

@@ -7,7 +7,7 @@ class Search extends React.Component{
   render(){
     return(
       <div>
-          <input type='textArea' onChange={this.props.handleChange} value={this.props.userInput}></input>
+          <input type='textArea' onChange={this.props.handleChange} value={this.props.userInput} placeholder={'keyword'}></input>
           <button onClick={this.props.handleSearch}>Search</button>
       </div>
     )

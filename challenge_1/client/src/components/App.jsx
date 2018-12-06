@@ -9,36 +9,23 @@ class App extends React.Component{
     this.state = {
       userInput: '',
       events: [],
-      offset: 0,
-      data: [],
-      elements: [],
-      perPage: 10,
+      pageCount: 10,
       currentPage: 0,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handlePageClick = this.handlePageClick.bind(this);
+    this.fetchEvents = this.fetchEvents.bind(this);
   }
   componentDidMount() {
     
   }
 
   handleSearch() {
-    console.log('Handle Search Invoked with ', this.state.userInput);
-    fetch(`/events?q=${this.state.userInput}&_page=0&_limit=10`)
-    .then(response => response.json())
-    .then(result => {
-      console.log(JSON.stringify(result));
-      this.setState({events: result});
-    })
-    .catch(err => {
-      console.log(err);
-    })
-
+    this.fetchEvents(this.state.userInput, 0, false);
   }
 
   handleChange(event) {
-    console.log('Handle Change Invoked!');
     const target = event.target;
     this.setState({
       userInput: target.value
@@ -46,25 +33,26 @@ class App extends React.Component{
   }
 
   handlePageClick(data){
-    console.log(data)
-    console.log('Handle Search Invoked with ', this.state.userInput);
-    fetch(`/events?q=${this.state.userInput}&_page=${data.selected+1}&_limit=10`)
+    this.fetchEvents(this.state.userInput, data.selected+1, true);
+  };
+
+  fetchEvents(userInput, page, pageChanged){
+    fetch(`/events?q=${userInput}&_page=${page}&_limit=10`)
     .then(response => response.json())
     .then(result => {
-      console.log(JSON.stringify(result));
       this.setState({events: result});
+      if(pageChanged) this.setState({currentPage: page});
     })
     .catch(err => {
       console.log(err);
     })
-    this.setState({currentPage: data.selected});
-  };
+  }
 
   render(){
     return(
       <div>
+        <h1>Search History Events!</h1>
         <Search handleSearch={this.handleSearch} handleChange={this.handleChange} userInput={this.state.userInput}/>
-        <h1>Hi from React!</h1>
         <List events={this.state.events}/>
         <ReactPaginate previousLabel={"previous"}
                        nextLabel={"next"}
